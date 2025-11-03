@@ -1,27 +1,24 @@
-// const mult = (a=1, b=2) => a * b;
-// console.log(mult(4,5));
-// console.log(mult());
+// forEach
+const numbers = [2, 4, 6, 9, 7, 10];
+console.log(numbers);
+// numbers.forEach((number, index, array) => {
+//   console.log(number, index, array);
+// });
+// numbers.forEach((number) => {
+//   console.log(number, number ** 2);
+// });
 
-// const getPerimetrSquare = (side) => side *4
-// console.log(getPerimetrSquare(5));
+// map
+const newArrayNumbers = numbers.map((elem) => elem * elem);
+console.log(newArrayNumbers);
+console.log(numbers);
 
-// const isAdult = (age, AGE_ADULT = 18) =>
-//   age >= AGE_ADULT ? "adult" : "not adult";
-// console.log(isAdult(17));
+// filter
+const evenNumbers = numbers.filter((item) => item % 2 === 0);
+console.log(evenNumbers);
+console.log(numbers);
 
-const site = {
-  title: "my site",
-  headers: ["qwe1", "qwe2", "qwe3"],
-  showHeaders() {
-    this.headers.forEach((elem) => {
-      console.log(elem, this.title);
-    });
-  },
-  //  showHeadersAndTitile() {
-  //   this.headers.forEach(function (elem) {
-  //     console.log(elem, this.title);
-  //   });
-  // },
-};
-
-site.showHeaders();
+// reduce
+const summa = numbers.reduce((accumulator, number)=>accumulator+number)
+console.log(summa);
+console.log(numbers);
