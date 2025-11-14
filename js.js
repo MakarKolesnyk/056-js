@@ -1,24 +1,28 @@
-// forEach
-const numbers = [2, 4, 6, 9, 7, 10];
-console.log(numbers);
-// numbers.forEach((number, index, array) => {
-//   console.log(number, index, array);
-// });
-// numbers.forEach((number) => {
-//   console.log(number, number ** 2);
-// });
+function summa (...args){
+    return args.reduce((sum, elem)=>sum+eleem, 0);
+}
 
-// map
-const newArrayNumbers = numbers.map((elem) => elem * elem);
-console.log(newArrayNumbers);
-console.log(numbers);
+const map = new Map()
 
-// filter
-const evenNumbers = numbers.filter((item) => item % 2 === 0);
-console.log(evenNumbers);
-console.log(numbers);
+map.set('word', ()=>{console.log("hi");}
+)
+map.set(summa, 22);
+map.set(20, null)
 
-// reduce
-const summa = numbers.reduce((accumulator, number)=>accumulator+number)
-console.log(summa);
-console.log(numbers);
+console.log(map);
+console.log(map.size);
+console.log(map.get(summa));
+console.log(map.has(summa));
+
+map.forEach((value, key)=>console.log(value, key))
+
+const test = {
+    props: 45,
+    title: "Object",
+    555:1000,
+    age: 33,
+    "01":"01"
+}
+for (const key in test) {
+    // console.log(key, test[key]);
+}
