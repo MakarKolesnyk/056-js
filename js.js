@@ -1,27 +1,56 @@
-class BankCard{
-    constructor(owner, balance=0, experince){
-    this.owner = owner
-    this.balance = balance
-    this.experince = experince
-    }
-    toString(){
-        return "bank card by"+ this.owner;11
-    }
-    addToBalance(money){
-        return this.balance += money;
-    }
-    showBalance(){
-        return this.balance
-    }
-    widthdraw(money){
-        return this.balance -= money;
-    }
+class Book {
+  constructor(author, title) {
+    this.author = author;
+    this.title = title;
+    this.id = Book.count++;
+  }
+  static count = 0;
+  showInfo() {
+    return `title = ${this.title}
+    author = ${this.author}
+    id = ${this.id}`;
+  }
 }
 
-const card = new BankCard('qwe123',0, 2025)
-console.log(card);
+class Reader {
+  constructor(name) {
+    this.name = name;
+    this.id = Reader.count++;
+  }
+  static count = 0;
+  showInfo() {
+    return `name = ${this.name} 
+        id = ${this.id}`;
+  }
+}
 
-console.log(card.showBalance());
-card.addToBalance(1000);
-card.widthdraw(500)
-console.log(card.showBalance());
+class Library {
+  constructor() {
+    this.books = [];
+    this.readers = [];
+    this.booksAndReaders = [];
+  }
+  addBook(...book) {
+    this.books.push(...book);
+  }
+  addReaders(...reader) {
+    this.readers.push(...reader);
+  }
+  addBookForReader(reader, book) {
+    this.booksAndReaders.push({ idReader: reader.id, idBook: book.id});
+  }
+  showAllBooks(){
+    this.books.forEach((elem)=>console.table(elem));
+  }
+}
+const book1 = new Book("It", "Kiing");
+const book2 = new Book("Autsider", "Kiing");
+const user1 = new Reader("Alex");
+const user2 = new Reader("Bob");
+const library = new Library();
+library.addBook(book1, book2);
+library.addReaders(user1, user2);
+library.addBookForReader(user1, book2)
+library.addBookForReader(user2, book1)
+console.log(library);
+library.showAllBooks()
