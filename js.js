@@ -1,54 +1,27 @@
-// 1
-// function User(name, age){
-//     this.age = age;
-//     this.name = name;
-// }
-
-// 2
-// function UserPrototype(){
-//     this.logName = function(){
-//         console.log(this.name);
-//     }
-// }
-
-// 3
-// User.prototype = new UserPrototype
-
-class Pet{
-    constructor(name, type, age){
-        this.name = name;
-        this.type = type;
-        this.age = age;
+class BankCard{
+    constructor(owner, balance=0, experince){
+    this.owner = owner
+    this.balance = balance
+    this.experince = experince
     }
-    logEat(){
-        console.log(this.name + " eating");
+    toString(){
+        return "bank card by"+ this.owner;11
     }
-    logSleep(){
-        console.log(this.name + " sleeping");
+    addToBalance(money){
+        return this.balance += money;
     }
-    logWalk(){
-        console.log(this.name + " walking");
+    showBalance(){
+        return this.balance
+    }
+    widthdraw(money){
+        return this.balance -= money;
     }
 }
 
-const pet = new Pet("Dgina", 'dog', 9)
-console.log(pet);
-pet.logEat()
-pet.logSleep()
-pet.logWalk()
+const card = new BankCard('qwe123',0, 2025)
+console.log(card);
 
-
-class User{
-    constructor(name, age){
-        this.name = name;
-        this.age = age;
-    }
-    logName(){
-        console.log(this.name);
-    }
-}
-
-// 4
-const user = new User("Alex", 20)
-console.log(user);
-user.logName()
+console.log(card.showBalance());
+card.addToBalance(1000);
+card.widthdraw(500)
+console.log(card.showBalance());
