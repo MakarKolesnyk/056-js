@@ -1,56 +1,76 @@
-class Book {
-  constructor(author, title) {
-    this.author = author;
-    this.title = title;
-    this.id = Book.count++;
+class Diary {
+  constructor(note) {
+    this.notes = [note];
   }
-  static count = 0;
-  showInfo() {
-    return `title = ${this.title}
-    author = ${this.author}
-    id = ${this.id}`;
+  addNote(note) {
+    if (this.notes.includes(note)) {
+      return;
+    }
+    this.notes.push(note);
+  }
+  deleteNote(note) {
+    const indexNote = this.notes.indexOf(note);
+    if (indexNote >= 0) {
+      this.notes.splice(indexNote, 1);
+    }
+  }
+  updateNote(note, newNote) {
+    const indexNote = this.notes.indexOf(note);
+    if (indexNote >= 0) {
+      this.notes.splice(indexNote, 1, newNote);
+    }
+  }
+  showAllNotes() {
+    this.notes.forEach((el) => {
+      console.log(el);
+    });
   }
 }
 
-class Reader {
-  constructor(name) {
-    this.name = name;
-    this.id = Reader.count++;
+const diary = new Diary("Hello");
+diary.addNote("learn class");
+diary.addNote("learn get, set");
+diary.addNote("qwerty");
+diary.addNote("Hi");
+diary.addNote("Hi");
+diary.addNote("Hi");
+diary.addNote("Hi");
+diary.deleteNote("Hi");
+diary.deleteNote("Hi");
+diary.updateNote("qwerty", "ytrewq");
+diary.updateNote("qwerty", "ytrewq");
+// diary.showAllNotes();
+
+class Message {
+  constructor(message) {
+    this.message = message;
   }
-  static count = 0;
-  showInfo() {
-    return `name = ${this.name} 
-        id = ${this.id}`;
+  getLength() {
+    return this.message.length;
+  }
+  getCountWords() {
+    return this.message.split(" ").length;
+  }
+  formatCapitalize() {
+    return this.message
+      .split(" ")
+      .map((el) => el[0].toUpperCase() + el.slice(1))
+      .join(" ");
+  }
+  sliceMessage(length = 20) {
+    return this.message.slice(0, length) + "...";
+  }
+  getCountSymbol(symbol){
+    return this.message.split("").filter((el)=>el === symbol).length
   }
 }
 
-class Library {
-  constructor() {
-    this.books = [];
-    this.readers = [];
-    this.booksAndReaders = [];
-  }
-  addBook(...book) {
-    this.books.push(...book);
-  }
-  addReaders(...reader) {
-    this.readers.push(...reader);
-  }
-  addBookForReader(reader, book) {
-    this.booksAndReaders.push({ idReader: reader.id, idBook: book.id});
-  }
-  showAllBooks(){
-    this.books.forEach((elem)=>console.table(elem));
-  }
-}
-const book1 = new Book("It", "Kiing");
-const book2 = new Book("Autsider", "Kiing");
-const user1 = new Reader("Alex");
-const user2 = new Reader("Bob");
-const library = new Library();
-library.addBook(book1, book2);
-library.addReaders(user1, user2);
-library.addBookForReader(user1, book2)
-library.addBookForReader(user2, book1)
-console.log(library);
-library.showAllBooks()
+const message = new Message(
+  "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae, impedit"
+);
+console.log(message.getLength());
+console.log(message.getCountWords());
+console.log(message.formatCapitalize());
+console.log(message.sliceMessage());
+console.log(message.getCountSymbol("a"));
+
