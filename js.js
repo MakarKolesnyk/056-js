@@ -1,76 +1,86 @@
-class Diary {
-  constructor(note) {
-    this.notes = [note];
+class Square {
+  #side;
+  constructor(side) {
+    this.side = side;
   }
-  addNote(note) {
-    if (this.notes.includes(note)) {
-      return;
+  set side(value) {
+    if (typeof value !== "number") {
+      throw new TypeError("type must be number");
     }
-    this.notes.push(note);
-  }
-  deleteNote(note) {
-    const indexNote = this.notes.indexOf(note);
-    if (indexNote >= 0) {
-      this.notes.splice(indexNote, 1);
+    if (value <= 0) {
+      throw new RangeError("value must be positive");
     }
+    this.#side = value;
   }
-  updateNote(note, newNote) {
-    const indexNote = this.notes.indexOf(note);
-    if (indexNote >= 0) {
-      this.notes.splice(indexNote, 1, newNote);
-    }
+  get side() {
+    return this.#side;
   }
-  showAllNotes() {
-    this.notes.forEach((el) => {
-      console.log(el);
-    });
+  getArea() {
+    return this.#side ** 2;
   }
 }
 
-const diary = new Diary("Hello");
-diary.addNote("learn class");
-diary.addNote("learn get, set");
-diary.addNote("qwerty");
-diary.addNote("Hi");
-diary.addNote("Hi");
-diary.addNote("Hi");
-diary.addNote("Hi");
-diary.deleteNote("Hi");
-diary.deleteNote("Hi");
-diary.updateNote("qwerty", "ytrewq");
-diary.updateNote("qwerty", "ytrewq");
-// diary.showAllNotes();
+try {
+  const square = new Square(5);
+  // console.log(square.getArea());
+} catch (error) {
+  console.error(error);
+}
 
-class Message {
-  constructor(message) {
-    this.message = message;
+class Circle{
+  #radius;
+  constructor(radius){
+    this.radius = radius
   }
-  getLength() {
-    return this.message.length;
+  set radius(value) {
+    if (typeof value !== "number") {
+      throw new TypeError("type must be number")
+    }
+    if (value <=0) {
+      throw new RangeError("value must be positive")
+    }
+    this.#radius = value;
   }
-  getCountWords() {
-    return this.message.split(" ").length;
+  getArea(){
+    return Math.PI * this.#radius ** 2;
   }
-  formatCapitalize() {
-    return this.message
-      .split(" ")
-      .map((el) => el[0].toUpperCase() + el.slice(1))
-      .join(" ");
-  }
-  sliceMessage(length = 20) {
-    return this.message.slice(0, length) + "...";
-  }
-  getCountSymbol(symbol){
-    return this.message.split("").filter((el)=>el === symbol).length
+  getPeremiter(){
+    return 2 * Math.PI * this.#radius**2;
   }
 }
 
-const message = new Message(
-  "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repudiandae, impedit"
-);
-console.log(message.getLength());
-console.log(message.getCountWords());
-console.log(message.formatCapitalize());
-console.log(message.sliceMessage());
-console.log(message.getCountSymbol("a"));
+try {
+  const circle = new Circle(2)
+  // console.log(circle.getArea());
+  // console.log(circle.getPeremiter());
+} catch (error) {
+  console.error(error)
+}
 
+// console.log("1");
+
+
+class User {
+  #login;
+  constructor(login){
+    this.login = login
+  }
+  set login(value){
+    if(typeof value !== "string"){
+      throw new TypeError ('type must be string')
+    }
+    if(value.trim().length<3 || value.trim().length>15){
+      throw new RangeError ('length 3..15')
+    }
+    this.#login = value
+  }
+  get login(){
+    return this.#login;
+  }
+}
+
+try {
+  const user = new User("qwert")
+} catch (error) {
+  console.error(error)
+}
