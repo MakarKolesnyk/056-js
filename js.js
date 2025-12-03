@@ -1,64 +1,78 @@
-class User {
-  #login;
-  constructor(login) {
-    this.login = login;
+function throwErrorNumber(value, minValue=0) {
+  if (typeof value !== "number" || value <= minValue) throw new Error("invalid value");
+}
+
+class Product {
+  #name;
+  #price;
+  constructor(name, price) {
+    this.name = name;
+    this.price = price;
   }
-  set login(value) {
-    if (typeof value !== "string") {
-      throw new TypeError("type must be string");
+  set name(value) {
+    if (typeof value !== "string" || value.trim().length < 3) {
+      throw new Error("invalid value");
     }
-    if (value.trim().length < 3 || value.trim().length > 15) {
-      throw new RangeError("length 3..15");
-    }
-    this.#login = value;
+    this.#name = value;
   }
-  get login() {
-    return this.#login;
+  get name() {
+    return this.#name;
   }
-  showHi() {
-    return "Hi, my login is " + this.#login;
+  set price(value) {
+    throwErrorNumber(value);
+    this.#price = value;
   }
-  askQuations() {
-    return "my quations: ......?";
+  get price() {
+    return this.#price;
+  }
+  getInfo(){
+   return this.#name +  ", price = " + this.#price;
   }
 }
 
-// Moderator -login -status
-class Moderator extends User {
-  #status;
-  constructor(login, status) {
-    super(login);
-    this.status = status;
+class RealProduct extends Product {
+  #weight;
+  constructor(name, price, weight) {
+    super(name, price);
+    this.weight = weight;
   }
-  set status(value) {
-    if (typeof value !== "string") {
-      throw new TypeError("must be sting");
-    }
-    if (value !== "main" && value !== "simle") {
-      throw new RangeError("must be: main or simple");
-    }
-    this.#status = value;
+  set weight(value) {
+    throwErrorNumber(value);
+    this.#weight = value;
   }
-  get status() {
-    return this.#status;
+  get weight() {
+    return this.#weight;
   }
-  showHi() {
-    return super.showHi() + ", my status - " + this.#status;
-  }
-  askQuations(){
-    return "i`m moderator " + super.askQuations()
+  getInfo(){
+    return super.getInfo() + ", weight = " + this.#weight + 'kg';
   }
 }
 
-const moderator = new Moderator("bob", "main"); //simple
-console.log(moderator);
-console.log(moderator.showHi());
-console.log(moderator.askQuations());
-
+class VirtualProduct extends Product{
+  #size;
+  constructor(name, price, size){
+    super(name, price)
+    this.size = size;
+  }
+  set size(value){
+    throwErrorNumber(value)
+    this.#size = value
+  }
+  get size(){
+    return this.#size
+  }
+  getInfo(){
+    return super.getInfo() + ", size = " + this.#size + "mb";
+  }
+}
 
 try {
-  const user = new User("Robin");
-  console.log(user);
+  const egg = new Product("egg", 3.54);
+  console.log(egg.getInfo());
+  const disk = new RealProduct("music disk", 154, 0.05);
+  console.log(disk.getInfo());
+  const albom = new VirtualProduct('new albom', 200, 110)
+  console.log(albom.getInfo());
 } catch (error) {
   console.error(error);
 }
